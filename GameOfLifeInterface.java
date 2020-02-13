@@ -1,7 +1,7 @@
 public class GameOfLifeInterface{
     /* attributs */
     /* constructor */
-    public GameOfLifeInterface(){
+    public GameOfLifeInterface(LifeGameEngine engine){
         
     }
     /* methods */
