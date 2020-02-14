@@ -7,8 +7,11 @@ public class LifeGameEngine{
     private int height;
     // cells
     private class Cell{
-        private boolean alive;
-        public Cell(){}
+        public boolean alive;
+        public Cell(){
+            alive = false;
+        }
+        public setState(boolean state) { alive = state; };
     }
     private Cell[][] map;
     private HashMap<Cell, Cell[]> nCell;
@@ -66,5 +69,34 @@ public class LifeGameEngine{
     public int getW(){ return width; }
     public int getH() { return height; }
     public int getNbneighbour(int x, int y){ return nCell.get(map[x][y]).length; }
+    // action on cells
+    private boolean ifCellAlive(int x, int y){
+        int count = 0;
+        /* run through neighbour */
+        for (int i = 0; i < getNbneighbour(x, y); i++) {
+            // if neighbour alive
+            if (nCell.get(map[x][y])[i].alive)
+                count++;
+        }
+        return (count == 3 || count == 2);
+    }
+    private boolean ifCellDead(int x, int y) {
+        int count = 0;
+        /* run through neighbour */
+        for (int i=0; i<getNbneighbour(x, y); i++){
+            // if neighbour alive
+            if (nCell.get(map[x][y])[i].alive) count++;
+        }
+        return (count == 3);
+    }
+    public boolean isAliveNext(int x, int y){
+        if (map[x][y] != null){
+            if (map[x][y].alive) return ifCellAlive(x, y);
+            else return ifCellDead(x, y);
+        }
+        return false;
+    }
+    // engine action
+    public void generateEcosystem(){ }
     public void update() { }
 }
