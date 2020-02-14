@@ -3,6 +3,9 @@ public class Main{
         LifeGameEngine engine = new LifeGameEngine(20, 20);
         GameOfLifeInterface display = new GameOfLifeInterface(engine);
         engine.generateEcosystem();
-        display.CMD_display();
+        while (display.running()){
+            if (!display.pause()) engine.update();
+            if (!display.pause()) display.CMD_display();
+        }
     }
 }

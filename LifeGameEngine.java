@@ -110,5 +110,11 @@ public class LifeGameEngine{
             }
         }
     }
-    public void update() { }
+    public void update() { 
+        for (int i = 0; i < height; i++) {
+            for (int e = 0; e < width; e++) {
+                map[i][e].alive = isAliveNext(i, e);
+            }
+        }
+    }
 }
