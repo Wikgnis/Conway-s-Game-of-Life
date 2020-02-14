@@ -1,5 +1,8 @@
 import java.util.HashMap;
-import java.util.ArrayList;;
+import java.util.ArrayList;
+import java.util.Random;
+
+// https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
 
 public class LifeGameEngine{
     /* attributs */
@@ -11,12 +14,13 @@ public class LifeGameEngine{
         public Cell(){
             alive = false;
         }
-        public setState(boolean state) { alive = state; };
     }
     private Cell[][] map;
     private HashMap<Cell, Cell[]> nCell;
     /* constructor */
     public LifeGameEngine(int w, int h){
+        width = w;
+        height = h;
         map = new Cell[h][w];
         nCell = new HashMap<Cell, Cell[]>();
         /* init map */
@@ -69,6 +73,7 @@ public class LifeGameEngine{
     public int getW(){ return width; }
     public int getH() { return height; }
     public int getNbneighbour(int x, int y){ return nCell.get(map[x][y]).length; }
+    public boolean alive(int x, int y){ return map[x][y].alive;}
     // action on cells
     private boolean ifCellAlive(int x, int y){
         int count = 0;
@@ -97,6 +102,13 @@ public class LifeGameEngine{
         return false;
     }
     // engine action
-    public void generateEcosystem(){ }
+    public void generateEcosystem(){
+        Random r = new Random();
+        for (int i=0; i<height; i++){
+            for (int e=0; e<width; e++){
+                map[i][e].alive = r.nextBoolean();
+            }
+        }
+    }
     public void update() { }
 }
